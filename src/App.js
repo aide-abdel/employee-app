@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import EmployeePage from './components/EmployeePage';
+import HomePage from './components/HomePage';
+import './index.css'
+import employees from './data.js'
+import { useState } from 'react';
+
 
 function App() {
+  const [selectedEmployee,setSelectedEmployee] = useState(null);
+
+  function employeeFromIndex(index){
+    const emp = employees.find(e=>e.id === index);
+    console.log("index",index);
+    console.log("id",emp.id);
+    setSelectedEmployee(emp);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-container'>
+     <HomePage employees={employees} employeeFromIndex={employeeFromIndex}/>
+     <EmployeePage selectedEmployee={selectedEmployee}/>
     </div>
   );
 }
